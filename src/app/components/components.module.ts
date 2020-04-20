@@ -8,9 +8,10 @@ import { RouterModule } from "@angular/router";
 import { HeaderComponent } from "./header/header.component";
 import { WebMenuComponent } from "./web-menu/web-menu.component";
 import { FooterComponent } from "./footer/footer.component";
+import { LeftSidebarComponent } from './left-sidebar/left-sidebar.component';
 
 @NgModule({
-  declarations: [HeaderComponent, WebMenuComponent, FooterComponent],
+  declarations: [HeaderComponent, WebMenuComponent, FooterComponent, LeftSidebarComponent],
   imports: [
     CommonModule,
     MatToolbarModule,
