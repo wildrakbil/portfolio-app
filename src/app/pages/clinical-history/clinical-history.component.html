@@ -1,0 +1,571 @@
+<div class="row">
+  <div class="row">
+    <div class="col-12 align-center margin-top">
+      <button mat-button mat-raised-button (click)="startMeet()">
+        Iniciar video llamada
+      </button>
+      <button
+        mat-button
+        mat-stroked-button
+        *ngIf="this.meetInProgress && !this.videoSpinner"
+        (click)="copyInClipboard()"
+        style="margin-left: 4px;"
+      >
+        ¡Copiar link!
+      </button>
+      <p *ngIf="this.meetInProgress && !this.videoSpinner" class="margin-top">
+        Copia y comparte este link para que tu paciente se una a la teleconsulta
+        <br />
+        {{ meetLink }}
+      </p>
+    </div>
+  </div>
+  <div
+    class="col-12 col-lg-6 col-md-6 margin-top"
+    id="meet"
+    *ngIf="meetInProgress"
+  >
+    <p class="align-center" *ngIf="videoSpinner">Por favor espere...</p>
+  </div>
+  <div
+    class="col-12 margin-top"
+    [ngClass]="{ 'col-lg-6 col-md-6': meetInProgress }"
+  >
+    <mat-horizontal-stepper labelPosition="bottom" #stepper [linear]="true">
+      <!-- ID data -->
+      <mat-step [stepControl]="fg0">
+        <form [formGroup]="fg0">
+          <ng-template matStepLabel>Datos de identificación</ng-template>
+          <div class="row">
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Nombre</mat-label>
+                <input
+                  matInput
+                  formControlName="name"
+                  placeholder="Ej. Lina Maria"
+                  maxlength="50"
+                />
+                <mat-error *ngIf="fg0.get('name').errors?.required">
+                  Los nombres son <strong>requeridos</strong>
+                </mat-error>
+                <mat-error *ngIf="fg0.get('name').errors?.maxlength">
+                  El número máximo de caracteres es 50
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <!-- Nombre -->
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Apellidos</mat-label>
+                <input
+                  matInput
+                  formControlName="lastName"
+                  placeholder="Ej. Ramirez Meneses"
+                  maxlength="50"
+                />
+                <mat-error *ngIf="fg0.get('lastName').errors?.required">
+                  Los apellidos son <strong>requeridos</strong>
+                </mat-error>
+                <mat-error *ngIf="fg0.get('lastName').errors?.maxlength">
+                  El número máximo de caracteres es 50
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <!-- Apellidos -->
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Tipo de documento</mat-label>
+                <mat-select
+                  name="docType"
+                  formControlName="docType"
+                  placeholder="C.C"
+                  #documentType
+                >
+                  <mat-option *ngFor="let dt of docTypes" [value]="dt.id">
+                    {{ dt.value }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <!-- Tipo de document -->
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Documento</mat-label>
+                <input
+                  matInput
+                  formControlName="document"
+                  placeholder="Ej. 1029288287"
+                  maxlength="10"
+                />
+                <mat-error *ngIf="fg0.get('document').errors?.required">
+                  El número de documento es <strong>requerido</strong>
+                </mat-error>
+                <mat-error *ngIf="fg0.get('document').errors?.maxlength">
+                  El número máximo de caracteres es 10
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <!-- Documento -->
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Email</mat-label>
+                <input
+                  matInput
+                  formControlName="email"
+                  placeholder="Ej. pat@example.com"
+                />
+                <mat-error *ngIf="fg0.get('email').errors?.pattern">
+                  Por favor ingresa un email válido
+                </mat-error>
+                <mat-error *ngIf="fg0.get('email').errors?.required">
+                  El email es <strong>requerido</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <!-- Email -->
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Celular</mat-label>
+                <input
+                  matInput
+                  formControlName="mobilePhone"
+                  placeholder="Ej. 3007456465"
+                  maxlength="10"
+                />
+                <mat-error
+                  *ngIf="
+                    !fg0.get('mobilePhone').errors?.required &&
+                    fg0.get('mobilePhone').errors?.mobilePattern
+                  "
+                >
+                  Por favor ingresa un celular válido
+                </mat-error>
+                <mat-error *ngIf="fg0.get('mobilePhone').errors?.required">
+                  El celular es <strong>requerido</strong>
+                </mat-error>
+                <mat-error
+                  *ngIf="
+                    !fg0.get('mobilePhone').errors?.mobilePattern &&
+                    fg0.get('mobilePhone').errors?.maxlength
+                  "
+                >
+                  El número máximo de caracteres es 10
+                </mat-error>
+                <mat-error
+                  *ngIf="
+                    !fg0.get('mobilePhone').errors?.mobilePattern &&
+                    fg0.get('mobilePhone').errors?.minlength
+                  "
+                >
+                  El número mínimo de caracteres es 10
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <!-- Celular -->
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Dirección</mat-label>
+                <input
+                  matInput
+                  formControlName="address"
+                  placeholder="Ej. Calle 45 # 34 - 23"
+                  maxlength="50"
+                />
+                <mat-error *ngIf="fg0.get('address').errors?.maxlength">
+                  El número máximo de caracteres es 50
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <!-- Dirección -->
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Estado civil</mat-label>
+                <mat-select
+                  name="maritalStatus"
+                  formControlName="maritalStatus"
+                  #maritalStatus
+                >
+                  <mat-option
+                    *ngFor="let ms of maritalStatuses"
+                    [value]="ms.id"
+                  >
+                    {{ ms.value }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <!-- Estado civil -->
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Género</mat-label>
+                <mat-select name="gender" formControlName="gender" #gender>
+                  <mat-option *ngFor="let g of genders" [value]="g.id">
+                    {{ g.value }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="fg0.get('gender').errors?.required">
+                  La género es <strong>requerido</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <!-- Genero -->
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Nombre del acompañante</mat-label>
+                <input
+                  matInput
+                  formControlName="companionName"
+                  placeholder="Ej. Juan Carlos Ariza"
+                  maxlength="100"
+                />
+                <mat-error *ngIf="fg0.get('eps').errors?.maxlength">
+                  El número máximo de caracteres es 100
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <!-- Nombre Acompañante -->
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Parentesco</mat-label>
+                <mat-select
+                  name="companionRelationship"
+                  formControlName="companionRelationship"
+                  #companionRelationship
+                >
+                  <mat-option
+                    *ngFor="let cr of companionRelationships"
+                    [value]="cr.id"
+                  >
+                    {{ cr.value }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <!-- Parentesco -->
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>EPS</mat-label>
+                <input
+                  matInput
+                  formControlName="eps"
+                  placeholder="Ej. Sanitas"
+                  maxlength="50"
+                />
+                <mat-hint>Entidad promotora de salud</mat-hint>
+                <mat-error *ngIf="fg0.get('eps').errors?.required">
+                  La EPS es <strong>requerido</strong>
+                </mat-error>
+                <mat-error *ngIf="fg0.get('eps').errors?.maxlength">
+                  El número máximo de caracteres es 50
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <!-- EPS -->
+          </div>
+          <div class="col-12 margin-top align-right">
+            <button mat-stroked-button matStepperNext [disabled]="fg0.invalid">
+              Continuar
+            </button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="fg1">
+        <form [formGroup]="fg1">
+          <ng-template matStepLabel>Datos de la consulta</ng-template>
+          <div class="row">
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Finalidad de la consulta</mat-label>
+                <input
+                  matInput
+                  formControlName="consultationPurpose"
+                  placeholder="Ej. Dolor de cabeza"
+                  maxlength="100"
+                />
+                <mat-error
+                  *ngIf="fg1.get('consultationPurpose').errors?.required"
+                >
+                  La finalidad es <strong>requerida</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <!-- Finalidad -->
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Causa externa</mat-label>
+                <input
+                  matInput
+                  formControlName="externalCause"
+                  placeholder="Ej. Causa externa"
+                />
+                <mat-error *ngIf="fg1.get('externalCause').errors?.required">
+                  La causa externa es <strong>requerida</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <!-- Causa externa -->
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Diagnóstico principal</mat-label>
+                <input
+                  matInput
+                  formControlName="principalDiagnostic"
+                  placeholder="Ej. Diagnóstico"
+                />
+                <mat-error
+                  *ngIf="fg1.get('principalDiagnostic').errors?.required"
+                >
+                  El diagnóstico principal es <strong>requerido</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <!-- Diagnóstico principal -->
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Diagnóstico relacionado 1</mat-label>
+                <input
+                  matInput
+                  formControlName="relatedDiagnosis1"
+                  placeholder="Ej. Diagnóstico relacionado 1"
+                />
+              </mat-form-field>
+            </div>
+            <!-- Diagnóstico 1 -->
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Diagnóstico relacionado 2</mat-label>
+                <input
+                  matInput
+                  formControlName="relatedDiagnosis2"
+                  placeholder="Ej. Diagnóstico relacionado 2"
+                />
+              </mat-form-field>
+            </div>
+            <!-- Diagnóstico 2 -->
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Diagnóstico relacionado 3</mat-label>
+                <input
+                  matInput
+                  formControlName="relatedDiagnosis3"
+                  placeholder="Ej. Diagnóstico relacionado 3"
+                />
+              </mat-form-field>
+            </div>
+            <!-- Diagnóstico 3 -->
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Tipo de diagnóstico</mat-label>
+                <input
+                  matInput
+                  formControlName="mainDiagnosisType"
+                  placeholder="Ej. Tipo de diagnóstico"
+                  maxlength="50"
+                />
+              </mat-form-field>
+            </div>
+            <!-- Tipo de diagnóstico -->
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Valor de la consulta</mat-label>
+                <input
+                  matInput
+                  formControlName="consultationValue"
+                  placeholder="Ej. 150.000,00"
+                  type="number"
+                />
+              </mat-form-field>
+            </div>
+            <!-- Valor de la consulta -->
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Valor de la cuota</mat-label>
+                <input
+                  matInput
+                  formControlName="feeValue"
+                  placeholder="Ej. $ 15.000,0"
+                  type="number"
+                />
+              </mat-form-field>
+            </div>
+            <!-- Valor de la couta -->
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Valor neto a pagar por la EAPB</mat-label>
+                <input
+                  matInput
+                  formControlName="totalValuePaidForEAPB"
+                  placeholder="Ej. $ 300.000,00"
+                  type="number"
+                />
+              </mat-form-field>
+            </div>
+            <!-- Valor de Neto a pagar -->
+          </div>
+          <div class="col-12 margin-top">
+            <button mat-stroked-button matStepperPrevious>Volver</button>
+            <button
+              class="right"
+              mat-stroked-button
+              matStepperNext
+              [disabled]="fg1.invalid"
+            >
+              Continuar
+            </button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="fg2">
+        <form [formGroup]="fg2">
+          <ng-template matStepLabel>Datos de procedimiento</ng-template>
+          <div class="row">
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Código</mat-label>
+                <input
+                  matInput
+                  formControlName="procedureCoode"
+                  placeholder="Ej. Código"
+                />
+              </mat-form-field>
+            </div>
+            <!-- Causa externa -->
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Ámbito de realización del procedimiento</mat-label>
+                <input
+                  matInput
+                  formControlName="scopeProcedure"
+                  placeholder="Ej. Ambito"
+                  maxlength="100"
+                />
+              </mat-form-field>
+            </div>
+            <!-- Finalidad -->
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Finalidad del procedimiento</mat-label>
+                <input
+                  matInput
+                  formControlName="procedurePurpose"
+                  placeholder="Ej. Dolor de cabeza"
+                  maxlength="100"
+                />
+              </mat-form-field>
+            </div>
+            <!-- Finalidad -->
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Diagnóstico principal</mat-label>
+                <input
+                  matInput
+                  formControlName="mainDiagnosis"
+                  placeholder="Ej. Diagnóstico"
+                />
+              </mat-form-field>
+            </div>
+            <!-- Diagnóstico principal -->
+          </div>
+          <div class="col-12 margin-top">
+            <button mat-stroked-button matStepperPrevious>Volver</button>
+            <button
+              class="right"
+              mat-stroked-button
+              matStepperNext
+              [disabled]="fg2.invalid"
+            >
+              Continuar
+            </button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="fg3">
+        <form [formGroup]="fg3">
+          <ng-template matStepLabel>Medicamentos</ng-template>
+          <div class="row">
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Código</mat-label>
+                <input
+                  matInput
+                  formControlName="medicationCode"
+                  placeholder="Ej. Código"
+                />
+              </mat-form-field>
+            </div>
+            <!-- Código -->
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Tipo de medicación</mat-label>
+                <input
+                  matInput
+                  formControlName="medicationType"
+                  placeholder="Ej. Tipo"
+                  maxlength="100"
+                />
+              </mat-form-field>
+            </div>
+            <!-- Tipo -->
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Acetaminofen</mat-label>
+                <input
+                  matInput
+                  formControlName="genericNameSubstance"
+                  placeholder="Ej. Acetaminofen"
+                  maxlength="100"
+                />
+              </mat-form-field>
+            </div>
+            <!-- Nombre genérico -->
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Presentación</mat-label>
+                <input
+                  matInput
+                  formControlName="pharmaceuticalForm"
+                  placeholder="Ej. Tabletas"
+                />
+              </mat-form-field>
+            </div>
+            <!-- Forma farmaceutica -->
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Concentración</mat-label>
+                <input
+                  matInput
+                  formControlName="concentration"
+                  placeholder="Ej. 1tb / 8h / 4d"
+                />
+              </mat-form-field>
+            </div>
+            <!-- concentracion -->
+            <div class="col-12 col-md-6 col-lg-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Unidad</mat-label>
+                <input
+                  matInput
+                  formControlName="unitMedicine"
+                  placeholder="Ej. ml, mg"
+                />
+              </mat-form-field>
+            </div>
+            <!-- Unidad -->
+          </div>
+          <div class="col-12 margin-top">
+            <button mat-stroked-button matStepperPrevious>Volver</button>
+            <button
+              class="right"
+              mat-stroked-button
+              matStepperNext
+              [disabled]="fg2.invalid"
+            >
+              Continuar
+            </button>
+          </div>
+        </form>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+#contacto {
+  background-image: url("/assets/img/img-contacto.jpg");
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+}
+
+.row-contacto {
+  color: white;
+  background-color: rgba(0, 155, 222, 0.75);
+  text-align: center;
+}
+
+.col-llamenos {
+  border-right: 1px solid #fff;
+}
+
+h3 {
+  font-size: 18px;
+  font-family: "NunitoSans Light", sans-serif;
+}
+
+.row-contacto a h3,
+.row-contacto a p {
+  color: white;
+}
+
+#menu-footer {
+  height: 60px;
+  background-color: #0a3b5e;
+  height: 100%;
+}
+
+#menu-footer ul {
+  list-style: none;
+}
+#menu-footer ul li a {
+  color: white;
+  font-size: 13px;
+}
+
+.row-logos {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  margin-top: 10px;
+}
+
+section#menu-footer {
+  padding: 20px;
+  padding-bottom: 0px;
+}
+
+.row {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+p {
+  font-size: 13px;
+  font-family: "NunitoSans SemiBold", sans-serif;
+}
+
+.col-redes p {
+  color: #5e7e95;
+  text-transform: uppercase;
+}
+.botones-redes {
+  text-align: center;
+  display: table;
+  width: 60%;
+  margin: auto;
+}
+.botones-redes a {
+  display: table-cell !important;
+}
+.iconSocial {
+  width: 30px;
+  height: 30px;
+  margin: 8px;
+}

@@ -3,13 +3,21 @@ import { CommonModule } from "@angular/common";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatIconModule } from "@angular/material/icon";
+import { RouterModule } from "@angular/router";
 
 import { HeaderComponent } from "./header/header.component";
 import { WebMenuComponent } from "./web-menu/web-menu.component";
+import { FooterComponent } from "./footer/footer.component";
 
 @NgModule({
-  declarations: [HeaderComponent, WebMenuComponent],
-  imports: [CommonModule, MatToolbarModule, MatMenuModule, MatIconModule],
-  exports: [HeaderComponent],
+  declarations: [HeaderComponent, WebMenuComponent, FooterComponent],
+  imports: [
+    CommonModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatIconModule,
+    RouterModule,
+  ],
+  exports: [HeaderComponent, FooterComponent],
 })
 export class ComponentsModule {}

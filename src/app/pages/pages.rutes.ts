@@ -2,6 +2,10 @@ import { RouterModule, Routes } from "@angular/router";
 
 import { PagesComponent } from "./pages.component";
 import { HomeComponent } from "./home/home.component";
+import { AssignmentComponent } from "./assignment/assignment.component";
+import { ClinicalHistoryComponent } from "./clinical-history/clinical-history.component";
+import { PreventionComponent } from "./prevention/prevention.component";
+import { ReportsComponent } from "./reports/reports.component";
 
 const pagesRoutes: Routes = [
   {
@@ -10,6 +14,10 @@ const pagesRoutes: Routes = [
     children: [
       { path: "home", component: HomeComponent },
       { path: "", redirectTo: "home", pathMatch: "full" },
+      { path: "assignment", component: AssignmentComponent },
+      { path: "clinical-history", component: ClinicalHistoryComponent },
+      { path: "prevention", component: PreventionComponent },
+      { path: "reports", component: ReportsComponent },
     ],
   },
 ];
