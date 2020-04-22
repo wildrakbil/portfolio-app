@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WebMenuComponent } from './web-menu.component';
+import { GeolocationComponent } from './geolocation.component';
 
-describe('WebMenuComponent', () => {
-  let component: WebMenuComponent;
-  let fixture: ComponentFixture<WebMenuComponent>;
+describe('GeolocationComponent', () => {
+  let component: GeolocationComponent;
+  let fixture: ComponentFixture<GeolocationComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WebMenuComponent ]
+      declarations: [ GeolocationComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WebMenuComponent);
+    fixture = TestBed.createComponent(GeolocationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

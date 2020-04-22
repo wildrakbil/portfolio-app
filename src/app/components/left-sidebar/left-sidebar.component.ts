@@ -9,7 +9,14 @@ import * as classie from "classie";
 export class LeftSidebarComponent implements OnInit {
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    var ul = document.getElementById("sidebarnav");
+    var lis = ul.getElementsByTagName("li");
+    for (var i = 0; i < lis.length; i++) {
+      classie.remove(lis[i], "active");
+      classie.remove(lis[i].getElementsByTagName("a"), "active");
+    }
+  }
 
   public hideMenu(idElement: string) {
     console.log(idElement);

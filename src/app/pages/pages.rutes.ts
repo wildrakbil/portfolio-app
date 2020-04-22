@@ -6,6 +6,8 @@ import { AssignmentComponent } from "./assignment/assignment.component";
 import { ClinicalHistoryComponent } from "./clinical-history/clinical-history.component";
 import { PreventionComponent } from "./prevention/prevention.component";
 import { ReportsComponent } from "./reports/reports.component";
+import { SupportComponent } from "./support/support.component";
+import { GeolocationComponent } from "./geolocation/geolocation.component";
 
 const pagesRoutes: Routes = [
   {
@@ -18,6 +20,8 @@ const pagesRoutes: Routes = [
       { path: "clinical-history", component: ClinicalHistoryComponent },
       { path: "prevention", component: PreventionComponent },
       { path: "reports", component: ReportsComponent },
+      { path: "support", component: SupportComponent },
+      { path: "geolocation", component: GeolocationComponent },
     ],
   },
 ];

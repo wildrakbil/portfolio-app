@@ -6,12 +6,11 @@ import { MatIconModule } from "@angular/material/icon";
 import { RouterModule } from "@angular/router";
 
 import { HeaderComponent } from "./header/header.component";
-import { WebMenuComponent } from "./web-menu/web-menu.component";
 import { FooterComponent } from "./footer/footer.component";
-import { LeftSidebarComponent } from './left-sidebar/left-sidebar.component';
+import { LeftSidebarComponent } from "./left-sidebar/left-sidebar.component";
 
 @NgModule({
-  declarations: [HeaderComponent, WebMenuComponent, FooterComponent, LeftSidebarComponent],
+  declarations: [HeaderComponent, FooterComponent, LeftSidebarComponent],
   imports: [
     CommonModule,
     MatToolbarModule,
@@ -19,6 +18,6 @@ import { LeftSidebarComponent } from './left-sidebar/left-sidebar.component';
     MatIconModule,
     RouterModule,
   ],
-  exports: [HeaderComponent, FooterComponent],
+  exports: [HeaderComponent, FooterComponent, LeftSidebarComponent],
 })
 export class ComponentsModule {}

@@ -31,23 +31,11 @@ $proyect-base-theme: mat-light-theme(
 
 /* You can add global styles to this file, and also import other style files */
 
-html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
 ._white {
   color: white;
 }
-._centreDivContent {
-  display: grid;
-  align-items: center;
-}
 
-.bodyContainer {
-  min-height: 500px;
+._centreDivContent {
+  display: inline-block;
+  text-align: center;
 }

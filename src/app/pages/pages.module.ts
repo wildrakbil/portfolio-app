@@ -24,6 +24,8 @@ import { ClinicalHistoryComponent } from "./clinical-history/clinical-history.co
 import { AssignmentComponent } from "./assignment/assignment.component";
 import { PreventionComponent } from "./prevention/prevention.component";
 import { ReportsComponent } from "./reports/reports.component";
+import { SupportComponent } from './support/support.component';
+import { GeolocationComponent } from './geolocation/geolocation.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { ReportsComponent } from "./reports/reports.component";
     AssignmentComponent,
     PreventionComponent,
     ReportsComponent,
+    SupportComponent,
+    GeolocationComponent,
   ],
   imports: [
     CommonModule,
