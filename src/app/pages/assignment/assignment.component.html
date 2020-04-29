@@ -15,9 +15,8 @@
       </div>
       <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-          <li class="breadcrumb-item">Apps</li>
-          <li class="breadcrumb-item active">Calendar</li>
+          <li class="breadcrumb-item"><a [routerLink]="'/home'">Home</a></li>
+          <li class="breadcrumb-item active">Agendamiento</li>
         </ol>
       </div>
       <div class="">
@@ -33,10 +32,7 @@
     <!-- Start Page Content -->
     <!-- ============================================================== -->
     <div class="row bodyContainer _centreDivContent">
-      <div style="text-align: center;">
-        <img src="assets/img/home.jpg" alt="home" class="imgHome" />
-      </div>
-
+      <app-calendar></app-calendar>
     </div>
     <!-- ============================================================== -->
     <!-- End PAge Content -->

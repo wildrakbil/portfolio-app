@@ -1,0 +1,52 @@
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title"><strong>Add Event</strong></h4>
+            <button type="button" class="close" (click)="closeModal()"
+                aria-hidden="true">×</button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Event Name</label>
+                            <input class="form-control" placeholder="Insert
+                                Event Name" type="text" name="title">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Category</label>
+                            <select class="form-control" name="category">
+                                <option value="bg-danger">Danger</option>
+                                <option value="bg-success">Success</option>
+                                <option value="bg-purple">Purple</option>
+                                <option value="bg-primary">Primary</option>
+                                <option value="bg-pink">Pink</option>
+                                <option value="bg-info">Info</option>
+                                <option value="bg-warning">Warning</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary waves-effect"
+                (click)="closeModal()">Close</button>
+            <button type="button" class="btn btn-success save-event
+                waves-effect waves-light" (click)="closeModal()">Create
+                event</button>
+            <button type="button" class="btn btn-danger delete-event
+                waves-effect waves-light" (click)="closeModal()"
+                style="display: none;">Delete</button>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End PAge Content -->
+<!-- ============================================================== -->
