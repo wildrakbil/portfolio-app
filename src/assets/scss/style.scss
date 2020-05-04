@@ -32,7 +32,11 @@ File: scss
 @import "widgets/widgets";
 @import "grid.scss";
 @import "responsive.scss";
+/** CSS **/
 @import "../css/spinners.css";
 @import "../css/animate.css";
-
+/** SCSS **/
+@import "../scss/pages/widget-page.scss";
+/** PLUGINS **/
 @import "../plugins/calendar/dist/fullcalendar.css";
+//@import "../plugins/scss/dist/_progress.scss";

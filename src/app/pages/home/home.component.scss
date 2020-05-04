@@ -3,6 +3,15 @@
   width: 100%;
 }
 .imgSmock {
-  min-height: 808px;
+  min-height: 400px;
+  max-height: 450px;
   background-color: rgba(7, 33, 70, 0.5);
+}
+
+.card-img {
+  height: 400px;
+}
+
+.icon {
+  height: 50px;
 }

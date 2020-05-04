@@ -20,24 +20,11 @@ import { ComponentsModule } from "../components/components.module";
 
 import { PagesComponent } from "./pages.component";
 import { HomeComponent } from "./home/home.component";
-import { ClinicalHistoryComponent } from "./clinical-history/clinical-history.component";
-import { AssignmentComponent } from "./assignment/assignment.component";
-import { PreventionComponent } from "./prevention/prevention.component";
-import { ReportsComponent } from "./reports/reports.component";
-import { SupportComponent } from './support/support.component';
-import { GeolocationComponent } from './geolocation/geolocation.component';
+import { FormationComponent } from './formation/formation.component';
+import { ExperienceComponent } from './experience/experience.component';
 
 @NgModule({
-  declarations: [
-    PagesComponent,
-    HomeComponent,
-    ClinicalHistoryComponent,
-    AssignmentComponent,
-    PreventionComponent,
-    ReportsComponent,
-    SupportComponent,
-    GeolocationComponent,
-  ],
+  declarations: [PagesComponent, HomeComponent, FormationComponent, ExperienceComponent],
   imports: [
     CommonModule,
     ComponentsModule,

@@ -12,37 +12,25 @@
             id="ul_11"
             class="has-arrow waves-effect waves-dark"
             aria-expanded="false"
-            (click)="hideMenu('ul_1')">
-            <img src="assets/img/photo.png" alt="user" />
-            <span class="hide-menu">Steave Jobs</span>
+            (click)="hideMenu('ul_1')"
+          >
+            <img src="assets/img/photo.jpg" alt="user" />
+            <span class="hide-menu">William Garzon</span>
           </a>
           <ul aria-expanded="false" id="ul_1" class="collapse">
-            <li><a>My Profile </a></li>
-            <li><a>My Balance</a></li>
-            <li><a>Inbox</a></li>
-            <li><a>Account Setting</a></li>
-            <li><a>Logout</a></li>
+            <li>
+              <a class="waves-effect waves-dark" [routerLink]="'/formation'">
+                <i class="spt icon-graduation"></i>
+                Formación
+              </a>
+            </li>
+            <li>
+              <a class="waves-effect waves-dark" [routerLink]="'/experience'">
+                <i class="mdi spt mdi-briefcase"></i>
+                Experiencia
+              </a>
+            </li>
           </ul>
-        </li>
-        <li class="nav-devider"></li>
-        <li>
-          <a class="waves-effect waves-dark" [routerLink]="'/assignment'"><i
-              class="mdi mdi-book-open-variant"></i><span class="hide-menu">Agendamiento</span></a>
-        </li>
-        <li>
-          <a class="waves-effect waves-dark" [routerLink]="'/clinical-history'"><i
-              class="mdi mdi-book-open-page-variant"></i><span
-              class="hide-menu">Historia clínica</span></a>
-        </li>
-        <li>
-          <a class="waves-effect waves-dark" [routerLink]="'/prevention'"><i
-              class="mdi mdi-heart-pulse"></i><span
-              class="hide-menu">Prevencion</span></a>
-        </li>
-        <li>
-          <a class="waves-effect waves-dark" [routerLink]="'/reports'"><i
-              class="mdi mdi-chart-line"></i><span
-              class="hide-menu">Reportes</span></a>
         </li>
       </ul>
     </nav>
